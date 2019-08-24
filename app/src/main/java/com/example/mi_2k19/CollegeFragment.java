@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mi_2k19.retrofit.Api;
-import com.example.mi_2k19.retrofit.Cities;
+import com.example.mi_2k19.retrofit.College;
 import com.example.mi_2k19.retrofit.College;
 import com.example.mi_2k19.retrofit.Hero;
 import com.example.mi_2k19.retrofit.Student;
@@ -27,17 +27,15 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MenuFragment extends Fragment {
+public class CollegeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_menu, null);
     }
 
-    private static CityAdapter adapter;
-    ArrayList<Cities> Cities;
-    ArrayList<College> Colleges;
-    ArrayList<Student> Students;
+    private static CollegeAdapter adapter;
+    ArrayList<College> College;
     ListView simpleList;
 
     @Override
@@ -46,11 +44,11 @@ public class MenuFragment extends Fragment {
         simpleList = (ListView) getView().findViewById(R.id.simpleListView);
 //        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.homelayout, R.id.textView, countryList);
 //        simpleList.setAdapter(arrayAdapter);
-        Cities = new ArrayList<>();
-        getCities();
+        College = new ArrayList<>();
+        getCollege();
     }
 
-    private void getCities() {
+    private void getCollege() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Api.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
@@ -58,17 +56,17 @@ public class MenuFragment extends Fragment {
 
         Api api = retrofit.create(Api.class);
 
-        Call<List<Cities>> call = api.getCities();
+        Call<List<College>> call = api.getCollege(MainActivity.city_id);
 
-        call.enqueue(new Callback<List<Cities>>() {
+        call.enqueue(new Callback<List<College>>() {
             @Override
-            public void onResponse(Call<List<Cities>> call, Response<List<Cities>> response) {
-                List<Cities> cityList = response.body();
-                Collections.reverse(cityList);
+            public void onResponse(Call<List<College>> call, Response<List<College>> response) {
+                List<College> CollegeList = response.body();
+                Collections.reverse(CollegeList);
                 if (getActivity()!=null) {
-                    Cities.addAll(cityList);
-                    Toast.makeText(getContext(), String.valueOf(Cities.size()), Toast.LENGTH_LONG).show();
-                    adapter = new CityAdapter(Cities, getActivity(), getFragmentManager());
+                    College.addAll(CollegeList);
+                    Toast.makeText(getContext(), String.valueOf(College.size()), Toast.LENGTH_LONG).show();
+                    adapter = new CollegeAdapter(College, getActivity(), getFragmentManager());
 //                    Toast.makeText(getContext(), adapter.toString(), Toast.LENGTH_LONG).show();
 
                 }
@@ -79,11 +77,11 @@ public class MenuFragment extends Fragment {
 //                Toast.makeText(getActivity(), Integer.toString(Users.size()), Toast.LENGTH_SHORT).show();
 
                 //Creating an String array for the ListView
-                int[] cities = new int[cityList.size()];
+                int[] colleges = new int[CollegeList.size()];
 
                 //looping through all the heroes and inserting the names inside the string array
-                for (int i = 0; i < cityList.size(); i++) {
-                    cities[i] = cityList.get(i).getId();
+                for (int i = 0; i < CollegeList.size(); i++) {
+                    colleges[i] = CollegeList.get(i).getId();
 //                    Toast.makeText(getActivity(),heroes[i].toString() , Toast.LENGTH_SHORT).show();
                 }
 
@@ -94,7 +92,7 @@ public class MenuFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Cities>> call, Throwable t) {
+            public void onFailure(Call<List<College>> call, Throwable t) {
 //                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

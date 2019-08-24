@@ -16,7 +16,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.mi_2k19.retrofit.Cities;
+import com.example.mi_2k19.retrofit.College;
 import com.example.mi_2k19.retrofit.Hero;
+import com.example.mi_2k19.retrofit.Student;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;

@@ -1,7 +1,7 @@
 package com.example.mi_2k19.retrofit;
 
 
-public class Hero {
+public class User {
 
     private String bloger_name;
     private String pic_url;
@@ -15,7 +15,7 @@ public class Hero {
     private String instalink;
 
 
-    public Hero(String bloger_name, String pic_url, String types, String College, String bloger_topic, String bloger_blog, String bloger_status, String bloger_pic, String fblink, String instalink) {
+    public User(String bloger_name, String pic_url, String types, String College, String bloger_topic, String bloger_blog, String bloger_status, String bloger_pic, String fblink, String instalink) {
         this.bloger_name = bloger_name;
         this.pic_url = pic_url;
         this.types = types;

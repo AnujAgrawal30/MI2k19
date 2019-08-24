@@ -1,14 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/heading"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="Blog"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textSize="36sp" />
+
+    <EditText
+        android:id="@+id/blogger_topic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Blog"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_below="@+id/heading"
+        android:paddingTop="40dp"
+        android:text="Blog Topic" />
+
+    <EditText
+        android:id="@+id/blogger_blog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_below="@+id/blogger_topic"
+        android:paddingTop="40dp"
+        android:text="Blog" />
+
+    <Button
+        android:id="@+id/upload_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/blogger_blog"
+        android:text="Select Image" />
+
+    <ImageView
+        android:id="@+id/selectedImage"
+        android:layout_width="82dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/upload_img"
+        app:srcCompat="@color/colorNavIcon" />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/selectedImage"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="59dp"
+        android:layout_marginRight="0dp"
+        android:text="Submit" />
+
+    <ImageView
+        android:id="@+id/profilepic"
+        android:layout_width="78dp"
+        android:layout_height="53dp"
+        android:layout_alignTop="@+id/blogger_topic"
+        android:layout_marginStart="59dp"
+        android:layout_marginLeft="59dp"
+        android:layout_marginTop="58dp"
+        android:layout_toEndOf="@+id/blogger_topic"
+        android:layout_toRightOf="@+id/blogger_topic"
+        app:srcCompat="@color/colorNavIcon" />
 
 </RelativeLayout>

@@ -24,10 +24,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by Belal on 1/23/2018.
- */
-
 public class HomeFragment extends Fragment {
     @Nullable
     @Override
