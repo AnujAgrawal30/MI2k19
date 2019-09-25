@@ -18,26 +18,27 @@ import retrofit2.http.Path;
 
 public interface Api {
 
-    String BASE_URL = "https:api.moodi.org";
+    String BASE_URL = "https://api.moodi.org";
+//    String BASE_URL = "http://192.168.43.222:8000";
 
     @GET("/blog")
     Call<List<Hero>> getHeroes();
 
 
     @Multipart
-    @POST("/api/post/")
+    @POST("/user/post/")
     Call<ResponseBody> postFile(
-            @Part("id") RequestBody id,
-            @Part("bloger_name") RequestBody bloger_name,
-            @Part MultipartBody.Part pic_url,
+            @Part("bloger_name") RequestBody name,
+            @Part("pic_url") RequestBody image,
             @Part("types") RequestBody types,
-            @Part("College") RequestBody college,
+            @Part("College") RequestBody College,
             @Part("bloger_topic") RequestBody bloger_topic,
             @Part("bloger_blog") RequestBody bloger_blog,
             @Part("bloger_status") RequestBody bloger_status,
             @Part MultipartBody.Part bloger_pic,
             @Part("fblink") RequestBody fblink,
-            @Part("instalink") RequestBody instalink);
+            @Part("instalink") RequestBody instalink
+            );
 
 
     @GET("blog/")

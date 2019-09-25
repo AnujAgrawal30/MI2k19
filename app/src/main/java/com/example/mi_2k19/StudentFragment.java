@@ -1,5 +1,6 @@
 package com.example.mi_2k19;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -45,6 +46,8 @@ public class StudentFragment extends Fragment {
 //        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.homelayout, R.id.textView, countryList);
 //        simpleList.setAdapter(arrayAdapter);
         Student = new ArrayList<>();
+        com.example.mi_2k19.retrofit.Student student = new Student("Go Back", "CHN", "Go Back", "Go Back", "Go Back", "Go Back");
+        Student.add(student);
         getStudent();
     }
 
@@ -62,11 +65,10 @@ public class StudentFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Student>> call, Response<List<Student>> response) {
                 List<Student> StudentList = response.body();
-                Collections.reverse(StudentList);
-                if (getActivity()!=null) {
+                if (getActivity() !=null) {
                     Student.addAll(StudentList);
                     Toast.makeText(getContext(), String.valueOf(Student.size()), Toast.LENGTH_LONG).show();
-                    adapter = new StudentAdapter(Student, getActivity(), getFragmentManager());
+                    adapter = new StudentAdapter(Student, getActivity(), getFragmentManager(), call);
 //                    Toast.makeText(getContext(), adapter.toString(), Toast.LENGTH_LONG).show();
 
                 }

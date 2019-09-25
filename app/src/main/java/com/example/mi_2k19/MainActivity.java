@@ -1,5 +1,6 @@
 package com.example.mi_2k19;
 
+import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
@@ -22,8 +23,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mi_2k19.retrofit.Api;
+import com.example.mi_2k19.retrofit.Cities;
+import com.example.mi_2k19.retrofit.College;
+import com.example.mi_2k19.retrofit.Student;
 
 import java.io.File;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -33,12 +41,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 //implement the interface OnNavigationItemSelectedListener in your activity class
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     static public String college_id;
     static public String city_id;
     private final Context mContext = this;
+    private List<String> city_ids;
+    Map<String, String[]> cities = new HashMap<>();
     EditText blog_topic;
     EditText blog;
     @Override
@@ -46,12 +57,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
 //        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.homelayout, R.id.textView, countryList);
 //        simpleList.setAdapter(arrayAdapter);
 
         //loading the default fragment
-        loadFragment(new HomeFragment());
+        loadFragment(new BlogFragment());
 
         //getting bottom navigation view and attaching the listener
         BottomNavigationView navigation = findViewById(R.id.navigation);
@@ -93,6 +103,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
+
+    static public void getNumbers(int id){
+        List<String> college_ids;
+
+    }
+
     //Upload File
     public void uploadFile(View view, Uri fileUri) {
         blog = view.findViewById(R.id.blogger_blog);
@@ -111,24 +127,24 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 // creates RequestBody instance from file
                 RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
                 // MultipartBody.Part is used to send also the actual filename
-                MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+//                MultipartBody.Part body1 = MultipartBody.Part.createFormData("pic_url", file.getName(), requestFile);
+                MultipartBody.Part body2 = MultipartBody.Part.createFormData("bloger_pic", file.getName(), requestFile);
                 // adds another part within the multipart request
 
-                RequestBody id = RequestBody.create(MediaType.parse("text/plain"), "1");
+//                RequestBody id = RequestBody.create(MediaType.parse("text/plain"), "1");
                 RequestBody bloger_name = RequestBody.create(MediaType.parse("text/plain"), "Anuj");
-                MultipartBody.Part pic_url = body;
+                RequestBody pic_url = RequestBody.create(MediaType.parse("text/plain"), "Url url url");
                 RequestBody types = RequestBody.create(MediaType.parse("text/plain"), "CH");;
                 RequestBody college = RequestBody.create(MediaType.parse("text/plain"), "IITB");;
                 RequestBody bloger_topic = RequestBody.create(MediaType.parse("text/plain"), blog_topic.getText().toString());
                 RequestBody bloger_blog = RequestBody.create(MediaType.parse("text/plain"), blog.getText().toString());
-                RequestBody bloger_status = RequestBody.create(MediaType.parse("text/plain"),"No");
-                MultipartBody.Part bloger_pic = body;
+                RequestBody bloger_status = RequestBody.create(MediaType.parse("text/plain"),"no");
+                MultipartBody.Part bloger_pic = body2;
                 RequestBody fblink = RequestBody.create(MediaType.parse("text/plain"),"sdklfjslkfd");
                 RequestBody instalink = RequestBody.create(MediaType.parse("text/plain"),"sdklfjslkfdksdjf");
 
                 // executes the request
                 Call<ResponseBody> call = service.postFile(
-                        id,
                         bloger_name,
                         pic_url,
                         types,
@@ -138,12 +154,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                         bloger_status,
                         bloger_pic,
                         fblink,
-                        instalink);
+                        instalink
+                );
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call,
                                            Response<ResponseBody> response) {
-                        Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), response.body().toString(), Toast.LENGTH_LONG).show();
                     }
 
                     @Override

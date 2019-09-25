@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
         simpleList = (ListView) getView().findViewById(R.id.simpleListView);
 //        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.homelayout, R.id.textView, countryList);
 //        simpleList.setAdapter(arrayAdapter);
-        Users= new ArrayList<>();
+        Users = new ArrayList<>();
          getHeroes();
     }
 

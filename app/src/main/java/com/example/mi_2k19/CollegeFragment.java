@@ -45,6 +45,8 @@ public class CollegeFragment extends Fragment {
 //        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.homelayout, R.id.textView, countryList);
 //        simpleList.setAdapter(arrayAdapter);
         College = new ArrayList<>();
+        com.example.mi_2k19.retrofit.College college = new College(0, "Go Back", "No", 0);
+        College.add(college);
         getCollege();
     }
 
@@ -62,7 +64,6 @@ public class CollegeFragment extends Fragment {
             @Override
             public void onResponse(Call<List<College>> call, Response<List<College>> response) {
                 List<College> CollegeList = response.body();
-                Collections.reverse(CollegeList);
                 if (getActivity()!=null) {
                     College.addAll(CollegeList);
                     Toast.makeText(getContext(), String.valueOf(College.size()), Toast.LENGTH_LONG).show();

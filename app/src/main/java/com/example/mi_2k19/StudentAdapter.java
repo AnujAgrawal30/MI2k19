@@ -12,15 +12,25 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mi_2k19.retrofit.Api;
 import com.example.mi_2k19.retrofit.Student;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class StudentAdapter extends ArrayAdapter<Student> implements View.OnClickListener{
 
     private ArrayList<Student> dataSet;
     Context mContext;
     private FragmentManager fragmentManager;
+    private Call<List<Student>> call;
 
     // View lookup cache
     private static class ViewHolder {
@@ -32,11 +42,12 @@ public class StudentAdapter extends ArrayAdapter<Student> implements View.OnClic
         TextView sop;
     }
 
-    public StudentAdapter(ArrayList<Student> data, Context context, FragmentManager fragmentManager) {
+    public StudentAdapter(ArrayList<Student> data, Context context, FragmentManager fragmentManager, Call<List<Student>> call) {
         super(context, R.layout.studentlayout, data);
         this.dataSet = data;
         this.mContext=context;
         this.fragmentManager = fragmentManager;
+        this.call = call;
     }
 
     @Override
@@ -104,8 +115,10 @@ public class StudentAdapter extends ArrayAdapter<Student> implements View.OnClic
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new HomeFragment();
-                loadFragment(fragment);
+                if(viewHolder.name.getText().toString().equals("Go Back")){
+                    Fragment fragment = new CollegeFragment();
+                    loadFragment(fragment);
+                }
             }
         });
 

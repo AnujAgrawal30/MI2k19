@@ -98,6 +98,11 @@ public class CollegeAdapter extends ArrayAdapter<College> implements View.OnClic
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(viewHolder.college_name.getText().toString().equals("Go Back")){
+                    Fragment fragment = new MenuFragment();
+                    loadFragment(fragment);
+                    return;
+                }
                 MainActivity.college_id = viewHolder.id.getText().toString();
                 Fragment fragment = new StudentFragment();
                 loadFragment(fragment);

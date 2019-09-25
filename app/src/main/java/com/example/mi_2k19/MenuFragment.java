@@ -64,7 +64,6 @@ public class MenuFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Cities>> call, Response<List<Cities>> response) {
                 List<Cities> cityList = response.body();
-                Collections.reverse(cityList);
                 if (getActivity()!=null) {
                     Cities.addAll(cityList);
                     Toast.makeText(getContext(), String.valueOf(Cities.size()), Toast.LENGTH_LONG).show();
