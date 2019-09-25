@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 //        simpleList.setAdapter(arrayAdapter);
 
         //loading the default fragment
-        loadFragment(new BlogFragment());
+        loadFragment(new HomeFragment());
 
         //getting bottom navigation view and attaching the listener
         BottomNavigationView navigation = findViewById(R.id.navigation);
