@@ -85,6 +85,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.navigation_notifications:
                 fragment = new MenuFragment();
                 break;
+            case R.id.navigation_sidedrawer:
+                fragment= new SideFragment();
+                break;
 
         }
 
