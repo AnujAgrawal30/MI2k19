@@ -14,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -26,6 +27,10 @@ import com.example.mi_2k19.retrofit.Api;
 import com.example.mi_2k19.retrofit.Cities;
 import com.example.mi_2k19.retrofit.College;
 import com.example.mi_2k19.retrofit.Student;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.io.File;
 import java.util.Collections;
@@ -61,11 +66,30 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 //        simpleList.setAdapter(arrayAdapter);
 
         //loading the default fragment
-        loadFragment(new HomeFragment());
+        loadFragment(new BlogFragment());
 
         //getting bottom navigation view and attaching the listener
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("Firebase", "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        // Log and toast
+//                        String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d("Firebase", token);
+                        Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
 
