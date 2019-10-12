@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "761078867065",
+    "firebase_url": "https://mood-indigo-2k19-7c117.firebaseio.com",
+    "project_id": "mood-indigo-2k19-7c117",
+    "storage_bucket": "mood-indigo-2k19-7c117.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761078867065:android:3d0316410395e8193960a8",
+        "android_client_info": {
+          "package_name": "com.example.mi_2k19"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761078867065-kph03nk7eautml1s1jq44re934r3n3k2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mi_2k19",
+            "certificate_hash": "3b9c74d45b63bf17d3c4e52ba7289e4c84279937"
+          }
+        },
+        {
+          "client_id": "761078867065-qaf36j707uf7qavqrpb85vg7apkt5b5k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1sjJiDqkGQOhcwAw820mGr-juFCwI4Oo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761078867065-qaf36j707uf7qavqrpb85vg7apkt5b5k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
