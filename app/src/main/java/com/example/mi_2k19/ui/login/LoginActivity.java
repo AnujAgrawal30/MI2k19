@@ -25,6 +25,10 @@ import android.widget.Toast;
 import com.example.mi_2k19.R;
 import com.example.mi_2k19.ui.login.LoginViewModel;
 import com.example.mi_2k19.ui.login.LoginViewModelFactory;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -41,6 +45,11 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -117,6 +126,16 @@ public class LoginActivity extends AppCompatActivity {
                         passwordEditText.getText().toString());
             }
         });
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+//        updateUI(account);
+        if(account != null) {
+            Toast.makeText(getApplicationContext(), account.getDisplayName().toString(), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
